@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Subir archivo CSV</title>
+</head>
+<body>
+  <h1>Sube tu archivo CSV</h1>
+  
+  <!-- Formulario para subir el archivo -->
+  <form action="/upload" method="post" enctype="multipart/form-data">
+    <label for="file">Selecciona un archivo CSV:</label>
+    <input type="file" name="file" accept=".csv" required>
+    <button type="submit">Subir archivo</button>
+  </form>
+  
+  <!-- Mensajes de error o éxito -->
+  <div id="message"></div>
+
+  <script>
+    // Mostrar mensaje de error o éxito
+    const messageDiv = document.getElementById('message');
+    const form = document.querySelector('form');
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const formData = new FormData(form);
+      
+      fetch('/upload', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.text())
+      .then(data => {
+        messageDiv.textContent = data;
+        messageDiv.style.color = 'green';
+      })
+      .catch(error => {
+        messageDiv.textContent = 'Hubo un error al subir el archivo: ' + error.message;
+        messageDiv.style.color = 'red';
+      });
+    });
+  </script>
+</body>
+</html>
