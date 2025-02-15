@@ -1,45 +1,72 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Subir archivo CSV</title>
+  <title>Notas contables</title>
+  <link rel="icon" href="https://eljardin.com.co/wp-content/uploads/2024/04/Logotipo-El-Jardin-White.png"
+    type="image/png">
+
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
 </head>
-<body>
-  <h1>Sube tu archivo CSV</h1>
-  
-  <!-- Formulario para subir el archivo -->
-  <form action="/upload" method="post" enctype="multipart/form-data">
-    <label for="file">Selecciona un archivo CSV:</label>
-    <input type="file" name="file" accept=".csv" required>
-    <button type="submit">Subir archivo</button>
-  </form>
-  
-  <!-- Mensajes de error o éxito -->
-  <div id="message"></div>
+
+<body class="bg-gray-50  flex items-center justify-center h-screen">
+
+  <div class="text-center p-6 bg-white shadow-lg rounded-lg max-w-md w-full">
+
+    <!-- Imagen de logo -->
+    <img src="https://eljardin.com.co/wp-content/uploads/2024/04/Logotipo-El-Jardin-White.png" alt="Logo"
+      class="w-48  mx-auto mb-4">
+
+    <h1 class="text-4xl text-blue-400 hover:text-blue-600 font-bold mb-6">Sube tu archivo CSV</h1>
+
+    <!-- Formulario para subir el archivo -->
+    <form action="/upload" method="post" enctype="multipart/form-data" class="space-y-4" id="upload-form">
+      <div>
+        <label for="file" class="block text-lg font-medium text-gray-700">Selecciona un archivo CSV:</label>
+        <input type="file" name="file" accept=".csv" required
+          class="mt-2 p-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-red-400" id="file-input">
+      </div>
+
+      <button type="submit"
+        class="w-full py-2 bg-green-400 text-white font-bold rounded-md hover:bg-green-500 transition duration-300">
+        Subir archivo
+      </button>
+    </form>
+
+    <!-- Mensajes de error o éxito -->
+    <div id="message" class="mt-4 text-lg"></div>
+  </div>
 
   <script>
     // Mostrar mensaje de error o éxito
     const messageDiv = document.getElementById('message');
     const form = document.querySelector('form');
+    const fileInput = document.getElementById('file-input'); // Referencia al input de archivo
+
     form.addEventListener('submit', (event) => {
       event.preventDefault();
       const formData = new FormData(form);
-      
+
       fetch('/upload', {
         method: 'POST',
         body: formData
       })
-      .then(response => response.text())
-      .then(data => {
-        messageDiv.textContent = data;
-        messageDiv.style.color = 'green';
-      })
-      .catch(error => {
-        messageDiv.textContent = 'Hubo un error al subir el archivo: ' + error.message;
-        messageDiv.style.color = 'red';
-      });
+        .then(response => response.text())
+        .then(data => {
+          messageDiv.textContent = data;
+          messageDiv.style.color = 'green';
+
+          // Limpiar el campo de archivo
+          fileInput.value = ''; // Restablecer el valor del input de archivo
+        })
+        .catch(error => {
+          messageDiv.textContent = 'Hubo un error al subir el archivo: ' + error.message;
+          messageDiv.style.color = 'red';
+        });
     });
   </script>
 </body>
+
 </html>
