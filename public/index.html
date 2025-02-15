@@ -11,7 +11,8 @@
   <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
 </head>
 
-<body class="bg-gray-50  flex items-center justify-center h-screen">
+<body class="bg-orange-400  flex items-center justify-center h-screen">
+  <!-- <body class="bg-gray-50  flex items-center justify-center h-screen"> -->
 
   <div class="text-center p-6 bg-white shadow-lg rounded-lg max-w-md w-full">
 
@@ -19,14 +20,17 @@
     <img src="https://eljardin.com.co/wp-content/uploads/2024/04/Logotipo-El-Jardin-White.png" alt="Logo"
       class="w-48  mx-auto mb-4">
 
-    <h1 class="text-4xl text-blue-400 hover:text-blue-600 font-bold mb-6">Sube tu archivo CSV</h1>
+    <h1 class="text-4xl text-orange-400 hover:text-orange-500 selection:text-green-400 font-bold mb-6">Sube tu archivo
+      CSV</h1>
 
     <!-- Formulario para subir el archivo -->
     <form action="/upload" method="post" enctype="multipart/form-data" class="space-y-4" id="upload-form">
       <div>
-        <label for="file" class="block text-lg font-medium text-gray-700">Selecciona un archivo CSV:</label>
+        <label for="file" class="block text-lg font-medium text-orange-400 selection:text-green-400">Selecciona un
+          archivo CSV:</label>
         <input type="file" name="file" accept=".csv" required
-          class="mt-2 p-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-red-400" id="file-input">
+          class="mt-2 p-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-red-400"
+          id="file-input">
       </div>
 
       <button type="submit"

@@ -51,7 +51,7 @@ app.post("/upload", upload.single("file"), (req, res) => {
     uploadedFileName
   );
 
-  exec(`python3 bot.py "${filePath}"`, (err, stdout, stderr) => {
+  exec(`python bot.py "${filePath}"`, (err, stdout, stderr) => {
     if (err) {
       console.error("Error al ejecutar el script de Python:", err);
       return res.status(500).send("Hubo un error al ejecutar el script de Python.");
